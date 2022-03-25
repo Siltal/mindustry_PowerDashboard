@@ -1,4 +1,4 @@
-## A low consume pwoer dashboard for Mindustry.
+## A low consume power dashboard for Mindustry.
 
 you can modity the first command of the CPU in game, to match your power consumption。
 
