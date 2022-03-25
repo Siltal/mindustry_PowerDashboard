@@ -1,0 +1,56 @@
+set scale 0.0002
+sensor in node1 @powerNetIn
+sensor out node1 @powerNetOut
+sensor capacity node1 @powerNetCapacity
+sensor store node1 @powerNetStored
+draw clear 50 50 50 0 0 0
+op mul inH in scale
+op mul outH out scale
+op div percent store capacity
+op mul percentH percent 70
+op div PSR out in
+op mul PSRH PSR 70
+draw color 10 250 10 250 0 0
+draw rect 5 5 12 inH 0 0
+draw color 255 10 10 250 0 0
+draw rect 22 5 12 outH 0 0
+draw color 255 165 0 100 0 0
+draw rect 46 5 12 70 0 0
+draw color 255 165 0 255 0 0
+draw rect 46 5 12 percentH 0 0
+draw color 116 45 45 255 0 0
+jump 23 equal in 0
+draw color 229 84 84 255 0 0
+draw rect 63 5 12 70 0 0
+jump 30 lessThanEq in 0
+jump 30 greaterThan PSR 1
+draw color 43 93 123 255 0 0
+draw rect 63 5 12 70 0 0
+draw color 0 165 255 255 0 0
+draw rect 63 5 12 PSRH 0 0
+draw color 98 100 115 255 0 0
+draw rect 39 0 2 80 0 0
+jump 36 greaterThan in out
+draw color 255 255 0 255 0 0
+draw triangle 63 10 69 5 75 10
+draw triangle 63 15 69 10 75 15
+draw color 255 0 0 255 0 0
+drawflush display1
+print "[#66ccff]电网总容量: "
+print capacity
+print "[]\n[orange]电网已储存: "
+print store
+print "\n[#00FF00]输入:"
+op idiv inT in 1
+print inT
+print "[]\n[red]输出: "
+op idiv outT out 1
+print outT
+print "[red]\n[blue]供电压力: "
+op mul PPSR PSR 100
+op idiv PPSR PPSR 0.01
+op div PPSR PPSR 100
+print PPSR
+print " %[]"
+printflush message1
+
